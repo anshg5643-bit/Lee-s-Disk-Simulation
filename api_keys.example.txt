@@ -1,0 +1,2 @@
+# Copy this file to api_keys.txt and add your Google Web Client ID.
+GOOGLE_CLIENT_ID=YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com

@@ -1,0 +1,80 @@
+/* ---- Monika walking robot ---- */
+#mk{position:fixed;left:0;right:0;bottom:0;height:0;z-index:60;pointer-events:none}
+#mkBot{position:absolute;bottom:6px;left:20px;width:70px;cursor:pointer;pointer-events:auto;transition:left linear;outline:none;filter:drop-shadow(0 6px 10px rgba(0,229,255,.35))}
+#mkBot:focus-visible{outline:2px solid #00f0ff;outline-offset:4px;border-radius:12px}
+.rb{display:block;width:100%;overflow:visible}.rb g,.rb rect,.rb circle{transform-box:fill-box}
+.flip .rb{transform:scaleX(-1)}
+.armL,.armR{transform-origin:50% 8%}.legL,.legR{transform-origin:50% 4%}
+.bob{animation:mkbreath 2.4s ease-in-out infinite alternate}
+.ant,.core{animation:mkglow 1.4s ease-in-out infinite alternate}
+.eye{animation:mkblink 5s infinite;transform-origin:50% 50%}
+.walking .bob{animation:mkstep .32s ease-in-out infinite alternate}
+.walking .legL,.walking .armR{animation:mkswing .32s ease-in-out infinite alternate}
+.walking .legR,.walking .armL{animation:mkswing .32s ease-in-out infinite alternate-reverse}
+.talk .mouth{animation:mktalk .16s ease-in-out infinite alternate;transform-origin:50% 50%}
+.talk .armR{animation:mkwave .45s ease-in-out infinite alternate}
+.listen .eye{fill:#ffd23f}.listen #mkBot:before{content:"";position:absolute;left:50%;top:30%;width:60px;height:60px;margin:-30px 0 0 -30px;border:2px solid #ffd23f;border-radius:50%;animation:mkring 1.2s ease-out infinite}
+@keyframes mkbreath{to{transform:translateY(-2px)}}@keyframes mkstep{to{transform:translateY(-4px)}}
+@keyframes mkswing{from{transform:rotate(-26deg)}to{transform:rotate(26deg)}}
+@keyframes mkwave{from{transform:rotate(-150deg)}to{transform:rotate(-95deg)}}
+@keyframes mkglow{to{opacity:.35}}@keyframes mkblink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+@keyframes mktalk{from{transform:scaleY(.6)}to{transform:scaleY(3)}}@keyframes mkring{from{transform:scale(.6);opacity:1}to{transform:scale(1.7);opacity:0}}
+#mkSay{position:absolute;bottom:128px;left:50%;transform:translateX(-50%);width:210px;padding:8px 11px;border-radius:12px;background:rgba(6,20,40,.94);border:1px solid #00f0ff;color:#d8f7ff;font:13px/1.4 system-ui,sans-serif;opacity:0;transition:.25s;pointer-events:none;box-shadow:0 0 16px rgba(0,240,255,.35)}
+#mkSay.show{opacity:1}
+#mkPanel{display:none;position:absolute;right:14px;bottom:140px;width:min(360px,92vw);height:430px;max-height:70vh;flex-direction:column;background:rgba(6,16,34,.96);border:1px solid rgba(0,240,255,.5);border-radius:16px;box-shadow:0 0 28px rgba(0,240,255,.25);color:#d8f7ff;font:14px/1.45 system-ui,sans-serif;pointer-events:auto;overflow:hidden}
+#mkPanel.open{display:flex}.mkh{display:flex;align-items:center;gap:8px;padding:10px 12px;background:linear-gradient(90deg,#0b3b5c,#4b1b6e)}.mkh b{font-size:15px}.mkh span{flex:1;font-size:12px;color:#9fe9ff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#mkLog{flex:1;overflow:auto;padding:10px}.mb{padding:7px 10px;border-radius:12px;margin:6px 0;max-width:88%}.mb.m{background:#12304d}.mb.u{background:#0e7490;margin-left:auto}
+.mkf{display:flex;gap:6px;padding:8px;border-top:1px solid rgba(0,240,255,.25)}.mkf input{flex:1;min-width:0;background:#061428;border:1px solid #1d4a6b;border-radius:9px;color:#fff;padding:8px}
+#mk button{cursor:pointer;border:0;border-radius:9px;background:#00b4d8;color:#001a2c;padding:7px 11px;font:inherit}.mkh button{background:transparent;color:#fff;padding:2px 6px}
+.mkt{display:flex;justify-content:space-between;gap:8px;padding:0 10px 9px;font-size:12px;color:#9fd8ee}.mkt input{margin-right:4px}
+/* ---- Futuristic holo-lab ---- */
+body.sim-page{background:radial-gradient(1200px 600px at 50% -10%,#10305a,#050b1a 60%) fixed;color:#cfeaff}
+.sim-page .site-header,.sim-page .footer{background:rgba(5,12,28,.85);border-color:rgba(0,240,255,.25);color:#8fb8d4}
+.sim-page .nav a,.sim-page .brand{color:#cfeaff}.sim-page .nav a.active{background:rgba(0,240,255,.15);color:#00f0ff}
+.sim-page .lab-top h1,.sim-page h3{color:#e8fbff;text-shadow:0 0 14px rgba(0,240,255,.5)}.sim-page .lab-top p,.sim-page .eyebrow{color:#7fb7d6}
+.sim-page .lab-panel{background:rgba(8,20,42,.72);border:1px solid rgba(0,240,255,.3);color:#cfeaff;backdrop-filter:blur(8px);box-shadow:0 0 22px rgba(0,160,255,.15),inset 0 0 30px rgba(0,120,255,.07)}
+.sim-page .lab-panel label,.sim-page .metric span,.sim-page .data-note,.sim-page .camera-status{color:#8fc3df}
+.sim-page .metric b,.sim-page .result-box strong{color:#00f0ff;text-shadow:0 0 10px rgba(0,240,255,.6);font-family:'DM Mono',monospace}
+.sim-page select,.sim-page input[type=range]{accent-color:#00f0ff}.sim-page select{background:#061428;color:#cfeaff;border:1px solid #1d4a6b;border-radius:8px;padding:7px}
+.sim-page .notice{background:rgba(0,240,255,.08);border-left:3px solid #00f0ff;color:#bfeeff}
+.sim-page .btn{background:rgba(0,240,255,.12);color:#00f0ff;border:1px solid rgba(0,240,255,.5)}.sim-page .btn.primary{background:#00b4d8;color:#001a2c}.sim-page .btn:hover{box-shadow:0 0 14px rgba(0,240,255,.6)}
+.sim-page .result-box,.sim-page .reading{background:rgba(0,240,255,.06);border:1px solid rgba(0,240,255,.25);color:#cfeaff}
+.sim-page .sim-stage{position:relative;overflow:hidden;border:1px solid rgba(0,240,255,.45);border-radius:18px;min-height:560px;background:linear-gradient(rgba(0,240,255,.07) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(0,240,255,.07) 1px,transparent 1px) 0 0/40px 40px,radial-gradient(circle at 50% 70%,#0b2c55,#040a18 70%);box-shadow:0 0 40px rgba(0,160,255,.25),inset 0 0 60px rgba(0,100,255,.2)}
+.sim-page .bench{background:linear-gradient(transparent,rgba(0,240,255,.25));border-top:2px solid #00f0ff;box-shadow:0 -4px 24px rgba(0,240,255,.5)}
+.sim-page .sim-title{color:#00f0ff;font-family:'DM Mono',monospace;letter-spacing:.12em;text-shadow:0 0 10px #00f0ff;z-index:6}
+.sim-page .sim-disc{background:linear-gradient(180deg,rgba(0,240,255,.45),rgba(0,70,160,.35))!important;border:2px solid #00f0ff!important;box-shadow:0 0 24px rgba(0,240,255,.6),inset 0 0 20px rgba(0,240,255,.45)!important}
+.sim-page #specimenDisc{background:linear-gradient(180deg,rgba(255,200,60,.65),rgba(255,120,0,.4))!important;border-color:#ffc23c!important;box-shadow:0 0 24px rgba(255,190,60,.7)!important}
+.sim-page #chamber{background:linear-gradient(180deg,rgba(255,79,216,.4),rgba(110,40,200,.3))!important;border-color:#ff4fd8!important;box-shadow:0 0 28px rgba(255,79,216,.6)!important;cursor:grab;transition:opacity .4s}
+.sim-page .chamber-label{color:#ffd0f4;text-shadow:0 0 8px #ff4fd8}
+.stage-cam{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scaleX(-1);opacity:0;transition:opacity .6s;filter:saturate(.4) hue-rotate(160deg) brightness(.8)}
+.cam-on .stage-cam{opacity:.4}
+#hud{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.sim-page .hand-target{z-index:7;background:rgba(0,240,255,.08)!important;border:1.5px dashed #00f0ff!important;color:#00f0ff!important;border-radius:14px;font:700 12px 'DM Mono',monospace;letter-spacing:.06em;text-shadow:0 0 8px #00f0ff;backdrop-filter:blur(3px)}
+.sim-page .hand-target.hover{background:rgba(0,240,255,.3)!important;box-shadow:0 0 26px #00f0ff}
+.sim-page .hand-target.capture{position:absolute;top:56px;left:50%;transform:translateX(-50%);padding:10px 16px;cursor:pointer}
+.sim-page .power-led,.sim-page .thermo-label{z-index:6;color:#9fe9ff}
+@media(max-width:950px){.sim-page .sim-stage{min-height:520px}}
+@media(prefers-reduced-motion:reduce){.bob,.ant,.core,.eye,.walking *{animation:none!important}}
+
+/* ---- Site-wide holo theme: simulation remains the visual reference ---- */
+body.holo-page:not(.sim-page){min-height:100vh;background:radial-gradient(1100px 650px at 50% -12%,#10305a 0%,#071329 48%,#040914 100%) fixed!important;color:#cfeaff!important}
+.holo-page:not(.sim-page) .site-header,.holo-page:not(.sim-page) .footer{background:rgba(5,12,28,.88)!important;border-color:rgba(0,240,255,.22)!important;color:#8fb8d4!important;backdrop-filter:blur(14px)}
+.holo-page:not(.sim-page) .brand,.holo-page:not(.sim-page) .nav a{color:#cfeaff!important}
+.holo-page:not(.sim-page) .nav a.active,.holo-page:not(.sim-page) .nav a:hover{background:rgba(0,240,255,.12)!important;color:#00f0ff!important}
+.holo-page:not(.sim-page) .page-hero h1,.holo-page:not(.sim-page) .dash-hero h1,.holo-page:not(.sim-page) .card h2,.holo-page:not(.sim-page) .card h3,.holo-page:not(.sim-page) .featured h2{color:#e8fbff!important;text-shadow:0 0 14px rgba(0,240,255,.24)}
+.holo-page:not(.sim-page) .page-hero p,.holo-page:not(.sim-page) .card p,.holo-page:not(.sim-page) .card li,.holo-page:not(.sim-page) .dash-hero p{color:#9fc5df!important}
+.holo-page:not(.sim-page) .card,.holo-page:not(.sim-page) .progress-card,.holo-page:not(.sim-page) .featured,.holo-page:not(.sim-page) .chat-shell,.holo-page:not(.sim-page) .voice-card,.holo-page:not(.sim-page) .auth-card{background:linear-gradient(145deg,rgba(8,22,45,.92),rgba(5,14,31,.92))!important;border:1px solid rgba(0,240,255,.24)!important;color:#cfeaff!important;box-shadow:0 0 28px rgba(0,140,255,.11),inset 0 0 22px rgba(0,240,255,.025)!important;backdrop-filter:blur(12px)}
+.holo-page:not(.sim-page) .featured{border-color:rgba(255,79,216,.38)!important;background:linear-gradient(120deg,rgba(11,35,66,.98),rgba(31,16,55,.96))!important}
+.holo-page:not(.sim-page) .module{background:rgba(0,240,255,.055)!important;border:1px solid rgba(0,240,255,.14)!important;color:#cfeaff!important}
+.holo-page:not(.sim-page) .module span,.holo-page:not(.sim-page) .icon,.holo-page:not(.sim-page) .guide-number{color:#00f0ff!important}
+.holo-page:not(.sim-page) .btn{background:rgba(0,240,255,.08)!important;color:#00f0ff!important;border:1px solid rgba(0,240,255,.42)!important}
+.holo-page:not(.sim-page) .btn.primary{background:linear-gradient(100deg,#00b4d8,#00f0ff)!important;color:#031427!important;border-color:#00f0ff!important;font-weight:800}
+.holo-page:not(.sim-page) .btn:hover{box-shadow:0 0 18px rgba(0,240,255,.35)!important}
+.holo-page:not(.sim-page) input,.holo-page:not(.sim-page) select,.holo-page:not(.sim-page) textarea{background:rgba(3,12,28,.9)!important;border:1px solid rgba(0,240,255,.28)!important;color:#e7faff!important}
+.holo-page:not(.sim-page) label,.holo-page:not(.sim-page) .eyebrow{color:#7fc8e8!important}
+.holo-page:not(.sim-page) .chat-head,.holo-page:not(.sim-page) .chat-input{border-color:rgba(0,240,255,.18)!important}
+.holo-page:not(.sim-page) .bubble.bot{background:rgba(0,240,255,.09)!important;color:#d8f7ff!important}.holo-page:not(.sim-page) .bubble.user{background:#075985!important;color:#fff!important}
+.holo-page:not(.sim-page) .login-shell{background:transparent!important}.holo-page:not(.sim-page) .login-aside{background:radial-gradient(circle at 20% 20%,rgba(0,240,255,.12),transparent 48%)!important;color:#d8f7ff!important}.holo-page:not(.sim-page) .login-copy h1,.holo-page:not(.sim-page) .auth-card h1{color:#e8fbff!important}.holo-page:not(.sim-page) .login-copy p,.holo-page:not(.sim-page) .auth-card p{color:#9fc5df!important}.holo-page:not(.sim-page) .auth-pane{background:transparent!important}.holo-page:not(.sim-page) .auth-note a{color:#00f0ff!important}
+.holo-page:not(.sim-page) .guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:20px 0}.holo-page:not(.sim-page) .guide-card{padding:24px}.holo-page:not(.sim-page) .guide-number{font:700 12px 'DM Mono',monospace;letter-spacing:.18em;margin-bottom:12px}.holo-page:not(.sim-page) .guide-card li{margin:8px 0;line-height:1.55}.holo-page:not(.sim-page) .guide-card h2{font-size:23px;margin:0 0 12px}.holo-page:not(.sim-page) .troubleshoot{margin-bottom:50px}.holo-page:not(.sim-page) .diagnostic-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}.holo-page:not(.sim-page) .diagnostic-list>div{padding:14px;border:1px solid rgba(0,240,255,.16);border-radius:12px;background:rgba(0,240,255,.035)}.holo-page:not(.sim-page) .diagnostic-list b{color:#e8fbff}.holo-page:not(.sim-page) .notice{background:rgba(0,240,255,.08)!important;border-left:3px solid #00f0ff;color:#bfeeff!important;padding:12px;border-radius:8px}
+.holo-page:not(.sim-page) .google-signin-wrap{margin:14px 0}.holo-page:not(.sim-page) .google-signin-button{min-height:42px}.holo-page:not(.sim-page) .auth-card{max-width:500px}
+@media(max-width:760px){.holo-page:not(.sim-page) .guide-grid,.holo-page:not(.sim-page) .diagnostic-list{grid-template-columns:1fr}.holo-page:not(.sim-page) .nav{flex-wrap:wrap}}

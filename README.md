@@ -1,4 +1,4 @@
-# MAIT Virtual Thermal Lab — Integrated Prototype
+# MAIT Virtual Thermal Lab — Integrated Prototype 
 
 A Flask-backed virtual practical for determining the thermal conductivity of a bad conductor using Lee's disc method. This version retains the attached project's interface, simulation workflow, MediaPipe hand controls, and Monika voice assistant while adding server-side accounts and saved experiment history.
 

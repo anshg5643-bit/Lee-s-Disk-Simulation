@@ -1,62 +1,153 @@
-# MAIT Virtual Thermal Lab — Integrated Prototype 
+# Lee's Disk Experiment — Virtual Thermal Lab
 
-A Flask-backed virtual practical for determining the thermal conductivity of a bad conductor using Lee's disc method. This version retains the attached project's interface, simulation workflow, MediaPipe hand controls, and Monika voice assistant while adding server-side accounts and saved experiment history.
+An interactive virtual physics laboratory for studying **Lee's Disk Method** and understanding heat conduction through poor thermal conductors. The project provides a digital environment for exploring thermal behavior, observing temperature changes, and learning the principles behind calculating thermal conductivity.
 
-## Features
-- Flask routes and SQLite database
-- Server-side signup/sign-in with Werkzeug password hashing and session-based access control
-- Per-account experiment result storage, including selected parameters and cooling readings
-- Lee's-disc simulation, cooling curve slope estimate, and calculated thermal conductivity
-- Optional webcam pinch gestures using MediaPipe Tasks Vision (requires browser camera permission and HTTPS or localhost)
-- Monika educational Q&A with browser speech recognition/text-to-speech where supported
-- Dedicated dashboard, experiment explanation, guidelines, apparatus, simulation, assistant, and saved-results pages
-- Synthetic simulation data is explicitly labelled and is not presented as physical measurement
+## 🚀 Live Demo
 
-## Run on Windows
-1. Extract this ZIP.
-2. Open a terminal in the extracted `MAIT_Virtual_Thermal_Lab_Integrated` folder.
-3. Create and activate a virtual environment:
+**[Launch Lee's Disk Virtual Lab](https://lee-s-disk-simulation.onrender.com)**
 
-   ```powershell
-   py -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   ```
+Explore the deployed prototype in your browser.
 
-4. Install requirements and start the app:
+## 🖥️ Prototype Preview
 
-   ```powershell
-   python -m pip install -r requirements.txt
-   python app.py
-   ```
+Add screenshots of your deployed application to the repository using the structure below.
 
-5. Open `http://127.0.0.1:5000` and create an account.
+### Main Interface
+![Lee's Disk Virtual Lab Interface](screenshots/main-interface.png)
 
-## Data and security notes
-- Accounts and experiment results are stored in `mait_lab.db` in this project folder. Keep this file private if it contains personal data.
-- Passwords are stored as hashes, not plaintext. Set a strong `SECRET_KEY` environment variable before deployment.
-- Google sign-in verifies Google Identity Services ID tokens server-side. Only the public client ID is stored in `api_keys.txt`; no client secret is used.
-- Before public deployment, use HTTPS, set `SECRET_KEY`, configure secure cookie settings, add CSRF protection/rate limiting, and review privacy/data-retention requirements.
-- The simulator produces **synthetic teaching data**. The calculated value of k is a demonstration estimate, not a validated experimental measurement.
+### Experiment Simulation
+![Lee's Disk Experiment Simulation](screenshots/experiment-simulation.png)
 
-## Hand controls and voice features
-Camera-based hand tracking requires a modern browser, camera permission, and network access to load the MediaPipe library/model. Monika's voice features depend on browser support for Web Speech APIs. Standard mouse/touch controls remain available.
+### Temperature Graph and Results
+![Temperature Graph and Results](screenshots/temperature-graph.png)
 
-## v2 — Holo-lab, walking Monika and full voice access
-- **Monika** is now a walking robot that patrols the bottom of every page (`static/assets/monika.js`). Click her or press **Alt+M** for hands-free one-on-one voice conversation (Chrome/Edge). She remembers your name, handles follow-ups ("more", "repeat"), and speaks aloud.
-- **Voice everywhere:** "open simulation / apparatus / guidelines / results", "sign out", "read this page", "enter email name at gmail dot com", "submit" (works on sign-in/register).
-- **Voice-operated lab:** "start heater", "capture readings", "remove chamber", "set thickness to 4", "use ebonite", "status", "reset", "enable hand tracking".
-- **Futuristic holo-lab** with webcam overlay, neon hand skeleton, hand bounding box and confidence, pinch ring, fingertip trail and FPS readout. Hold a pinch ~0.65 s over a glowing target, or pinch the steam chamber and lift it. Mouse/touch and buttons always work.
-- Run as before: `python app.py`, open http://127.0.0.1:5000 (camera and microphone need localhost or HTTPS).
+> **Note:** Replace these example image paths with screenshots of your actual prototype. Create a `screenshots` folder in the repository and add the corresponding PNG files.
 
-## Site-wide futuristic UI, hands-free Monika and hand-camera guide
-- All pages use the holo-lab dark navy / cyan / magenta visual system, with the simulation retaining its specialised holographic bench design.
-- Monika's microphone now toggles persistent hands-free voice mode. After activation she automatically resumes listening after each spoken response; use **Stop listening**, the microphone toggle, or **Alt+M** to turn voice mode off. Chrome/Edge speech recognition support and microphone permission are required. Browsers may suspend recognition when the tab is backgrounded.
-- The new **Hand-cam guide** page explains camera permissions, camera placement, pinch gestures, target actions, and common fixes. Find it in the navigation bar.
+## 🎯 Objectives
 
-## Google sign-in using only a client ID
-1. In Google Cloud Console, create a **Web application** OAuth client ID.
-2. Add `http://localhost:5000` and `http://127.0.0.1:5000` as authorised JavaScript origins.
-3. Put the public client ID in `api_keys.txt` as `GOOGLE_CLIENT_ID=...`. The file intentionally contains no client secret.
-4. Install dependencies with `python -m pip install -r requirements.txt`, then restart `python app.py`.
+- Understand the principle of heat conduction through poor conductors.
+- Study the working of Lee's Disk apparatus.
+- Observe temperature variations during heating and cooling.
+- Understand the role of steady-state temperature and cooling rate.
+- Learn how experimental observations help determine thermal conductivity.
 
-Google sign-in uses Google Identity Services to obtain an ID token and verifies that token on the server with `google-auth`. Keep `api_keys.txt` out of public Git repositories. Set `SECRET_KEY` as an environment variable for deployments; the development fallback is randomly generated and will invalidate sessions when the app restarts.
+## 🔬 About the Experiment
+
+Lee's Disk Method is used to determine the thermal conductivity of materials that conduct heat poorly, such as cardboard and other insulating materials.
+
+The experiment is based on the principle that, under steady-state conditions, the heat conducted through the specimen equals the rate of heat lost by the metallic disk, subject to the assumptions of the experimental model.
+
+The cooling rate of the metallic disk is used to estimate the rate of heat loss.
+
+### Fundamental equations
+
+Heat conducted through the specimen:
+
+\[
+\frac{Q}{t} = \frac{kA(T_1-T_2)}{x}
+\]
+
+Rate of heat loss by the metallic disk:
+
+\[
+\frac{Q}{t} = mc\left|\frac{dT}{dt}\right|
+\]
+
+Therefore, under the simplified model:
+
+\[
+k = \frac{mcx}{A(T_1-T_2)}
+\left|\frac{dT}{dt}\right|
+\]
+
+Where:
+
+- \(k\) = thermal conductivity of the specimen
+- \(m\) = mass of the metallic disk
+- \(c\) = specific heat capacity of the disk
+- \(x\) = thickness of the specimen
+- \(A\) = cross-sectional area
+- \(T_1-T_2\) = temperature difference across the specimen
+- \(\left|dT/dt\right|\) = magnitude of the cooling rate
+
+The exact expression used in the application may depend on its implementation and the assumptions of the simulation.
+
+## ✨ Key Features
+
+- **Virtual Experiment:** Explore the Lee's Disk setup digitally.
+- **Thermal Concepts:** Learn about heat conduction and thermal equilibrium.
+- **Temperature Analysis:** Understand temperature variation and cooling behavior.
+- **Graphical Visualization:** Present temperature observations and cooling curves, where implemented.
+- **Educational Accessibility:** Review experimental concepts without requiring continuous access to a physical laboratory.
+- **Browser-Based Access:** Open the deployed prototype without installing a desktop application.
+
+*Features should be adjusted to match the functionality currently implemented in the deployed version.*
+
+## 🧪 Experimental Procedure
+
+1. Set up the metallic disk and the specimen.
+2. Apply heat using the simulated heating arrangement.
+3. Allow the system to approach steady-state conditions.
+4. Record the relevant temperatures.
+5. Observe the cooling behavior of the metallic disk.
+6. Determine the cooling rate from temperature-versus-time observations.
+7. Apply the appropriate experimental equation to estimate thermal conductivity.
+
+## 📊 Expected Learning Outcomes
+
+After exploring the virtual lab, students should be able to:
+
+- Explain the principle of Lee's Disk Method.
+- Identify the important experimental parameters.
+- Interpret temperature-versus-time graphs.
+- Understand how cooling rate relates to heat transfer.
+- Explain the estimation of thermal conductivity for poor conductors.
+
+## 🛠️ Technology Stack
+
+Update this section to reflect the actual tools and frameworks used in the project.
+
+- **Frontend:** Add your implemented frontend framework or technologies.
+- **Backend:** Add your implemented backend framework, if applicable.
+- **Visualization:** Add the graphing library used, if applicable.
+- **Deployment:** Render
+
+## 🌐 Deployment
+
+The application is deployed on Render and can be accessed here:
+
+**Live URL:** https://lee-s-disk-simulation.onrender.com
+
+## 📁 Suggested Repository Structure
+
+```text
+lees-disk-virtual-lab/
+├── screenshots/
+│   ├── main-interface.png
+│   ├── experiment-simulation.png
+│   └── temperature-graph.png
+├── README.md
+├── requirements.txt
+└── application files
+```
+
+The structure is illustrative; retain your project's actual filenames and directories.
+
+## 🎓 Applications
+
+- Engineering physics laboratory practice
+- Virtual laboratory demonstrations
+- Heat transfer and thermodynamics education
+- Understanding experimental graphs and measurements
+
+## ⚠️ Disclaimer
+
+This project is intended for educational and simulation purposes. Simulated readings should not be presented as real experimental measurements unless independently verified using physical apparatus.
+
+## 👨‍💻 Author
+
+Developed as a virtual laboratory project to make engineering physics experiments more accessible and interactive.
+
+---
+
+**Explore the experiment:** [Lee's Disk Virtual Lab](https://lee-s-disk-simulation.onrender.com)
